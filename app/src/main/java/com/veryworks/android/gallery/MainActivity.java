@@ -1,13 +1,43 @@
 package com.veryworks.android.gallery;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.view.View;
+import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
+
+    ImageView imageView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void init() {
         setContentView(R.layout.activity_main);
+        imageView = (ImageView) findViewById(R.id.imageView);
+    }
+
+    public void onCamera(View view){
+
+    }
+
+    private static final int REQ_CAMERA = 222;
+    private static final int REQ_GALLERY = 333;
+
+    public void onGallery(View view){
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, REQ_GALLERY);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case REQ_GALLERY :
+                Uri imageUri = data.getData();
+                imageView.setImageURI(imageUri);
+                break;
+            case REQ_CAMERA :
+                break;
+        }
     }
 }

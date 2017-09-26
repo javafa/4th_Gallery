@@ -15,9 +15,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private static final int REQ_CODE = 999;
     private static final String permissions[] = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.READ_CONTACTS,
-            Manifest.permission.CALL_PHONE
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA
     };
 
     public abstract void init();
