@@ -31,13 +31,17 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
-            case REQ_GALLERY :
-                Uri imageUri = data.getData();
-                imageView.setImageURI(imageUri);
-                break;
-            case REQ_CAMERA :
-                break;
+        if(resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQ_GALLERY:
+                    if(data != null) {
+                        Uri imageUri = data.getData();
+                        imageView.setImageURI(imageUri);
+                    }
+                    break;
+                case REQ_CAMERA:
+                    break;
+            }
         }
     }
 }
